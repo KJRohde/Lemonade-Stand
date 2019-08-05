@@ -8,5 +8,14 @@ namespace LemonadeStand
 {
     class UserInterface
     {
+        //member variables
+
+
+        //construct
+
+
+        //methods
+
+
     }
 }

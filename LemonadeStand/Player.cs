@@ -8,5 +8,22 @@ namespace LemonadeStand
 {
     class Player
     {
+        //member variables
+        public string playerName;
+        public Inventory inventory;
+
+
+        //construct
+
+
+        //methods
+        public string ChooseName()
+        {
+            Console.WriteLine("Please choose a name for your Lemonade Stand!");
+            playerName = Console.ReadLine();
+            return playerName;
+        }
+
+
     }
 }
