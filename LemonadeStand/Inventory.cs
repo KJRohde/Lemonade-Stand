@@ -9,13 +9,66 @@ namespace LemonadeStand
     class Inventory
     {
         //member variables
-
+        private Store store = new Store();
+        public int iceCubes;
+        public int lemons;
+        public int sugar;
+        public int cups;
+        public double moneyCounter;
 
         //construct
+        public Inventory(int sugar, int lemons, int iceCubes, int cups)
+        {
+            moneyCounter = 20;
+        }
+
 
 
         //methods
-
+        public int AddSugar()
+        {
+            store.PurchaseSugar();
+            sugar += store.sugarSale;
+            return sugar;
+        }
+        public int AddLemons()
+        {
+            store.PurchaseLemons();
+            lemons += store.lemonSale;
+            return lemons;
+        }
+        public int AddIce()
+        {
+            store.PurchaseIce();
+            iceCubes += store.iceSale;
+            return iceCubes;
+        }
+        public int AddCups()
+        {
+            store.PurchaseCups();
+            cups += store.cupSale;
+            return cups;
+        }
+        public double ChargeSugar()
+        {
+            moneyCounter -= store.sugarSale * store.sugarPrice;
+            return moneyCounter;
+        }
+        public double ChargeLemons()
+        {
+            moneyCounter -= store.lemonSale * store.lemonPrice;
+            return moneyCounter;
+        }
+        public double ChargeIce()
+        {
+            moneyCounter -= store.iceSale * store.icePrice;
+            return moneyCounter;
+        }
+        public double ChargeCups()
+        {
+            moneyCounter -= store.cupSale * store.cupPrice;
+            return moneyCounter;
+        }
 
     }
 }
