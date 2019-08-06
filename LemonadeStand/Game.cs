@@ -16,6 +16,7 @@ namespace LemonadeStand
         private double cupCharge;
         private int customersServed;
         Random random = new Random();
+        private int totalDays;
 
         //construct
         public Game()
@@ -27,6 +28,10 @@ namespace LemonadeStand
         public List<Day> GenerateDays()
         {
             days = new List<Day>();
+            for (int i = 1; i <= totalDays; i++)
+            {
+                days.Add(new Day(random));
+            }
             return days;
         }
         public void RunGame()
@@ -35,12 +40,14 @@ namespace LemonadeStand
             player1 = new Player();
             Console.ReadLine();
             player1.ChooseName();
+            Console.WriteLine("How many days will your stand be open?");
+            totalDays = int.Parse(Console.ReadLine());
             GenerateDays();
             while (dayCounter <= 7)
             {
                 inventory.pitcherCounter = 0;
                 inventory.iceCubes = 0;
-                Console.WriteLine("It is day " + dayCounter + " of the week. You have $" + inventory.moneyCounter + ".\n");
+                Console.WriteLine("It is day " + dayCounter + " of " + player1.playerName + "being open. You have $" + inventory.moneyCounter + ".\n");
                 Console.ReadLine();
                 Console.WriteLine("Today, it is " + days[dayCounter-1].weather.temperature + "degrees outside and it is" + days[dayCounter-1].weather.condition + ".");
                 Console.WriteLine("You currently have the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups");

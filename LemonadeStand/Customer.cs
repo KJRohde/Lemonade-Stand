@@ -9,10 +9,8 @@ namespace LemonadeStand
     class Customer
     {
         //member variables
-        public int numberOfCustomers;
-        public int chanceToBuy;
-        public double cash;
-        public string[] customers;
+
+        public Preference preference;
         Random random;
 
 
@@ -20,13 +18,9 @@ namespace LemonadeStand
         public Customer(Random random)
         {
             this.random = random;
+            preference.GiveCash();
+            preference.GiveThreshold();
         }
         //methods
-        public int GenerateCustomers()
-        {
-            numberOfCustomers = random.Next(20, 30);
-            return numberOfCustomers;
-        }
-
     }
 }
