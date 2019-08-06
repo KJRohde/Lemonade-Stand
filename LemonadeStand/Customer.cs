@@ -23,11 +23,10 @@ namespace LemonadeStand
         }
 
         //methods
-        public void GenerateCustomers()
+        public int GenerateCustomers()
         {
-            numberOfCustomers = random.Next(10, 20);
-            customers = new string[numberOfCustomers];
-
+            numberOfCustomers = random.Next(20, 30);
+            return numberOfCustomers;
         }
 
     }
