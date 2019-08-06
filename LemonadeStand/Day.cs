@@ -11,16 +11,18 @@ namespace LemonadeStand
         //member variables
         public Weather weather;
         public Customer customer;
-
+        Random random;
         //construct
-        public Day()
+        public Day(Random random)
         {
-            weather = new Weather();
-            customer = new Customer();
+            this.random = random;
+            weather = new Weather(random);
+            customer = new Customer(random);
             customer.GenerateCustomers();
-            weather.GenerateTemp();
             weather.GenerateConditions();
+            weather.GenerateTemperature();
         }
+
         //methods
     }
 }

@@ -12,16 +12,15 @@ namespace LemonadeStand
         public int numberOfCustomers;
         public int chanceToBuy;
         public double cash;
-        Random random = new Random();
         public string[] customers;
+        Random random;
 
 
         //construct
-        public Customer()
+        public Customer(Random random)
         {
-
+            this.random = random;
         }
-
         //methods
         public int GenerateCustomers()
         {

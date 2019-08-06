@@ -15,11 +15,13 @@ namespace LemonadeStand
         public int sugar;
         public int cups;
         public double moneyCounter;
+        public int pitcherCounter;
 
         //construct
         public Inventory(int sugar, int lemons, int iceCubes, int cups)
         {
             moneyCounter = 20;
+            pitcherCounter = 0;
         }
 
 
@@ -69,6 +71,17 @@ namespace LemonadeStand
             moneyCounter -= store.cupSale * store.cupPrice;
             return moneyCounter;
         }
-
+        public int MakePitchers()
+        {
+            while (lemons >= 4 && sugar >= 4 && cups > 4 && iceCubes > 2)
+            {
+                lemons -= 4;
+                sugar -= 4;
+                cups -= 5;
+                iceCubes -= 3;
+                pitcherCounter++;
+            }
+            return pitcherCounter;
+        }
     }
 }

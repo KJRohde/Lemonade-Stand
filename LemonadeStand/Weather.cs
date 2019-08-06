@@ -10,13 +10,16 @@ namespace LemonadeStand
     {
         //member variables
         public int temperature;
-        Random random = new Random();
         public string[] conditions;
         public string condition;
+        Random random;
         //construct
-
+        public Weather(Random random)
+        {
+            this.random = random;
+        }
         //methods
-        public int GenerateTemp()
+        public int GenerateTemperature()
         {
             temperature = random.Next(55, 95);
             return temperature;

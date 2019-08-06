@@ -22,9 +22,9 @@ namespace LemonadeStand
         //construct
         public Store()
         {
-            sugarPrice = 0.18;
-            icePrice = 0.06;
-            lemonPrice = 0.49;
+            sugarPrice = 0.12;
+            icePrice = 0.05;
+            lemonPrice = 0.29;
             cupPrice = 0.08;
         }
 
@@ -33,7 +33,7 @@ namespace LemonadeStand
         {
             Console.WriteLine("How many cups of sugar would you like to buy?\nSugar costs 12 cents per cup.");
             sugarSale = int.Parse(Console.ReadLine());
-            Console.WriteLine("Are you sure you want to buy " + sugarSale + "cups of sugar for $" + sugarSale * sugarPrice + "?");
+            Console.WriteLine("Are you sure you want to buy " + sugarSale + " cups of sugar for $" + sugarSale * sugarPrice + "?");
             Console.ReadLine();
             return sugarSale;
         }
@@ -41,7 +41,7 @@ namespace LemonadeStand
         {
             Console.WriteLine("How many lemons would you like to buy?\nLemons costs 49 cents each.");
             lemonSale = int.Parse(Console.ReadLine());
-            Console.WriteLine("Are you sure you want to buy " + lemonSale + "lemons for $" + lemonSale * lemonPrice + "?");
+            Console.WriteLine("Are you sure you want to buy " + lemonSale + " lemons for $" + lemonSale * lemonPrice + "?");
             Console.ReadLine();
             return lemonSale;
         }
@@ -49,7 +49,7 @@ namespace LemonadeStand
         {
             Console.WriteLine("How many ice cubes would you like to buy?\nIce costs 6 cents per cube.");
             iceSale = int.Parse(Console.ReadLine());
-            Console.WriteLine("Are you sure you want to buy " + iceSale + "ice cubes for $" + iceSale * icePrice + "?");
+            Console.WriteLine("Are you sure you want to buy " + iceSale + " ice cubes for $" + iceSale * icePrice + "?");
             Console.ReadLine();
             return iceSale;
         }
@@ -57,7 +57,7 @@ namespace LemonadeStand
         {
             Console.WriteLine("How many cups would you like to buy?\nCups cost 8 cents each.");
             cupSale = int.Parse(Console.ReadLine());
-            Console.WriteLine("Are you sure you want to buy " + cupSale + "paper cups for $" + cupSale * cupPrice + "?");
+            Console.WriteLine("Are you sure you want to buy " + cupSale + " paper cups for $" + cupSale * cupPrice + "?");
             Console.ReadLine();
             return cupSale;
         }
