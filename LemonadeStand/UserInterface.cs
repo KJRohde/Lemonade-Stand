@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class UserInterface
+    public static class UserInterface
     {
-        //member variables
-
-
-        //construct
-
-
-        //methods
-
+        private static void DisplayInventory(Inventory inventory)
+        {
+            Console.WriteLine("You now have $" + inventory.moneyCounter + " and the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups\nAnd you have $" + inventory.moneyCounter + " remaining.");
+        }
 
     }
 }

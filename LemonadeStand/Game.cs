@@ -51,26 +51,38 @@ namespace LemonadeStand
                 inventory.iceCubes = 0;
                 servedTemperature = new List<Customer>();
                 served = new List<Customer>();
-                Console.WriteLine("It is day " + dayCounter + " of " + player1.playerName + "being open. You have $" + inventory.moneyCounter + ".\n");
+                Console.WriteLine("It is day " + dayCounter + " of " + player1.playerName + " being open. You have $" + inventory.moneyCounter + ".\n");
                 Console.ReadLine();
-                Console.WriteLine("Today, it is " + days[dayCounter - 1].weather.temperature + "degrees outside and it is" + days[dayCounter - 1].weather.condition + ".");
+                Console.WriteLine("Your Lemonade Stand forecast is below, temperature followed by conditions\n");
+                if (totalDays - 7 >= 0)
+                {
+                    for (i = dayCounter - 1; i <= dayCounter + 5; i++)
+                    {
+                        Console.WriteLine(days[i].weather.temperature + " " + days[i].weather.condition);
+                    }
+                }
+                else
+                {
+                    for (i = dayCounter - 1; i <= totalDays - 1; i++)
+                    {
+                        Console.WriteLine(days[i].weather.temperature + " " + days[i].weather.condition);
+                    }
+                }
+                Console.ReadLine();
+                Console.WriteLine("Today, it is " + days[dayCounter - 1].weather.temperature + " degrees outside and it is " + days[dayCounter - 1].weather.condition + ".");
                 Console.WriteLine("You currently have the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups");
-                Console.ReadLine();
+                Console.ReadLine(); 
                 Console.Clear();
                 inventory.AddSugar();
-                inventory.ChargeSugar();
-                Console.WriteLine("You now have the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups\nAnd you have $" + inventory.moneyCounter + " remaining.");
+                UserInterface.DisplayInventory();
                 Console.Clear();
                 inventory.AddLemons();
-                inventory.ChargeLemons();
                 Console.WriteLine("You now have the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups\nAnd you have $" + inventory.moneyCounter + " remaining.");
                 Console.Clear();
                 inventory.AddIce();
-                inventory.ChargeIce();
                 Console.WriteLine("You now have the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups\nAnd you have $" + inventory.moneyCounter + " remaining.");
                 Console.Clear();
                 inventory.AddCups();
-                inventory.ChargeCups();
                 Console.Clear();
                 Console.WriteLine("You now have the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups\nAnd you have $" + inventory.moneyCounter + " remaining.");
                 Console.WriteLine("You are done buying supplies for today. How much would you like to charge per cup of lemonade in cents?");
