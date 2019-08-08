@@ -32,26 +32,42 @@ namespace LemonadeStand
         public int PurchaseSugar()
         {
             Console.WriteLine("How many cups of sugar would you like to buy?\nSugar costs 12 cents per cup.");
-            sugarSale = int.Parse(Console.ReadLine());
-            return sugarSale;
+            while (int.TryParse(Console.ReadLine(), out sugarSale) && sugarSale >= 0)
+            {
+                return sugarSale;
+            }
+            Console.WriteLine("Please enter a whole number to purchase");
+            return PurchaseSugar();
         }
         public int PurchaseLemons()
         {
             Console.WriteLine("How many lemons would you like to buy?\nLemons costs 49 cents each.");
-            lemonSale = int.Parse(Console.ReadLine());
-            return lemonSale;
+            while (int.TryParse(Console.ReadLine(), out lemonSale))
+            {
+                return lemonSale;
+            }
+            Console.WriteLine("Please enter a whole number to purchase");
+            return PurchaseLemons();
         }
         public int PurchaseIce()
         {
             Console.WriteLine("How many ice cubes would you like to buy?\nIce costs 6 cents per cube.");
-            iceSale = int.Parse(Console.ReadLine());
-            return iceSale;
+            while (int.TryParse(Console.ReadLine(), out iceSale))
+            {
+                return iceSale;
+            }
+            Console.WriteLine("Please enter a whole number to purchase");
+            return PurchaseIce();
         }
         public int PurchaseCups()
         {
             Console.WriteLine("How many cups would you like to buy?\nCups cost 8 cents each.");
-            cupSale = int.Parse(Console.ReadLine());
-            return cupSale;
+            while (int.TryParse(Console.ReadLine(), out cupSale))
+            {
+                return cupSale;
+            }
+            Console.WriteLine("Please enter a whole number to purchase");
+            return PurchaseCups();
         }
 
     }

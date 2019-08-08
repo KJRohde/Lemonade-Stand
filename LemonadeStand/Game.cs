@@ -9,16 +9,17 @@ namespace LemonadeStand
     class Game
     {
         //member variables
-        private Player player1;
-        private int dayCounter;
+        public Player player1;
+        public int dayCounter;
         Inventory inventory = new Inventory(0, 0, 0, 0);
-        private List<Day> days;
+        public List<Day> days;
         private double cupCharge;
         Random random = new Random();
-        private int totalDays;
+        public int totalDays;
         private List<Customer> servedTemperature;
         private List<Customer> served;
         private int i;
+        private int cupsLemonade;
 
         //construct
         public Game()
@@ -47,65 +48,55 @@ namespace LemonadeStand
             GenerateDays();
             while (dayCounter <= totalDays)
             {
-                inventory.pitcherCounter = 0;
-                inventory.iceCubes = 0;
                 servedTemperature = new List<Customer>();
                 served = new List<Customer>();
-                Console.WriteLine("It is day " + dayCounter + " of " + player1.playerName + " being open. You have $" + inventory.moneyCounter + ".\n");
-                Console.ReadLine();
-                Console.WriteLine("Your Lemonade Stand forecast is below, temperature followed by conditions\n");
-                if (totalDays - 7 >= 0)
-                {
-                    for (i = dayCounter - 1; i <= dayCounter + 5; i++)
-                    {
-                        Console.WriteLine(days[i].weather.temperature + " " + days[i].weather.condition);
-                    }
-                }
-                else
-                {
-                    for (i = dayCounter - 1; i <= totalDays - 1; i++)
-                    {
-                        Console.WriteLine(days[i].weather.temperature + " " + days[i].weather.condition);
-                    }
-                }
-                Console.ReadLine();
-                Console.WriteLine("Today, it is " + days[dayCounter - 1].weather.temperature + " degrees outside and it is " + days[dayCounter - 1].weather.condition + ".");
-                Console.WriteLine("You currently have the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups");
-                Console.ReadLine(); 
+                UserInterface.BeginDay(inventory, player1);
+                GenerateForecast();
                 Console.Clear();
+                UserInterface.DisplayInventory(inventory);
                 inventory.AddSugar();
-                UserInterface.DisplayInventory();
-                Console.Clear();
+                UserInterface.DisplayInventory(inventory);
                 inventory.AddLemons();
-                Console.WriteLine("You now have the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups\nAnd you have $" + inventory.moneyCounter + " remaining.");
-                Console.Clear();
+                UserInterface.DisplayInventory(inventory);
                 inventory.AddIce();
-                Console.WriteLine("You now have the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups\nAnd you have $" + inventory.moneyCounter + " remaining.");
-                Console.Clear();
+                UserInterface.DisplayInventory(inventory);
                 inventory.AddCups();
+                UserInterface.DisplayInventory(inventory);
                 Console.Clear();
-                Console.WriteLine("You now have the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups\nAnd you have $" + inventory.moneyCounter + " remaining.");
-                Console.WriteLine("You are done buying supplies for today. How much would you like to charge per cup of lemonade in cents?");
-                cupCharge = 0.01 * int.Parse(Console.ReadLine());
+                UserInterface.DisplayInventory(inventory);
+                inventory.PlanPitchersSugar();
+                inventory.PlanPitchersLemon();
+                inventory.PlanPitchersIce();
+                Console.Clear();
+                GetCupCharge();
                 inventory.MakePitchers();
+                Console.WriteLine("Made " + inventory.pitcherCounter + " pitchers.");
+                Console.ReadLine();
+                cupsLemonade = inventory.pitcherCounter * 5;
+                Console.WriteLine("Made " + cupsLemonade + " cups.");
+                Console.ReadLine();
                 customersServedTemperature(days[dayCounter - 1].customers, days[dayCounter - 1].weather.temperature);
-                //There should now be a list of only customers that meet the temperature threshold
                 for (i = 0; i < servedTemperature.Count; i++)
                 {
                     customersServed(servedTemperature, servedTemperature[i].availableCash);
                 }
-                inventory.moneyCounter += served.Count * cupCharge;
-                Console.WriteLine("You have made " + inventory.pitcherCounter + " pitchers of lemonade to sell today.");
-                //Filter list of customers to yield a list of customer that match temperature threshold and available cash
-
-                Console.WriteLine("You served " + served.Count + " today!");
-                Console.WriteLine("You ended today with $" + inventory.moneyCounter + ". and all of your ice has melted");
-                Console.ReadLine();
-                Console.Clear();
+                if (served.Count > cupsLemonade)
+                {
+                    Console.WriteLine("You ran out of lemonade before the end of the day.");
+                    inventory.moneyCounter += cupsLemonade * cupCharge;
+                }
+                else
+                {
+                    Console.WriteLine("Out of the " + (cupsLemonade) + " cups of lemonade you made, you served " + served.Count + " customers!");
+                    inventory.moneyCounter += served.Count * cupCharge;
+                }          
+                UserInterface.EndDay(inventory);
+                inventory.pitcherCounter = 0;
+                cupsLemonade = 0;
+                inventory.iceCubes = 0;
                 dayCounter++;
-
             }
-            Console.WriteLine("In " + totalDays + " you were able to make $" + (inventory.moneyCounter - 20) + "from " + player1.playerName + ".");
+            UserInterface.EndGame(inventory, player1);
         }
         List<Customer> customersServedTemperature(List<Customer> customers, int temperature)
         {
@@ -130,6 +121,34 @@ namespace LemonadeStand
                 }
             }
             return served;
+        }
+        public void GenerateForecast()
+        {
+            if (totalDays - 7 >= 0)
+            {
+                for (i = dayCounter - 1; i <= dayCounter + 5; i++)
+                {
+                    Console.WriteLine(days[i].weather.temperature + " " + days[i].weather.condition);
+                }
+            }
+            else
+            {
+                for (i = dayCounter - 1; i <= totalDays - 1; i++)
+                {
+                    Console.WriteLine(days[i].weather.temperature + " " + days[i].weather.condition);
+                }
+            }
+            Console.ReadLine();
+        }
+        public double GetCupCharge()
+        {
+            Console.WriteLine("You are done buying supplies and making pitchers for today. How much would you like to charge per cup of lemonade in cents?");
+            while (double.TryParse(Console.ReadLine(), out cupCharge))
+            {
+                cupCharge *= 0.01;
+                return (cupCharge);
+            }
+            return GetCupCharge();
         }
     }
 }

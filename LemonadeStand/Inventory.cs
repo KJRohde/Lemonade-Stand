@@ -14,6 +14,9 @@ namespace LemonadeStand
         public int lemons;
         public int sugar;
         public int cups;
+        public int lemonsPerPitcher;
+        public int sugarPerPitcher;
+        public int iceCubesPerPitcher;
         public double moneyCounter;
         public int pitcherCounter;
         public bool comfirmPurchase;
@@ -31,6 +34,7 @@ namespace LemonadeStand
         //methods
         public int AddSugar()
         {
+            Console.WriteLine("You have $" + moneyCounter + " to buy supplies");
             store.PurchaseSugar();
             if (store.sugarSale * store.sugarPrice > moneyCounter)
             {
@@ -38,9 +42,7 @@ namespace LemonadeStand
                 return store.PurchaseSugar();
             }
             else
-            {
-                Console.WriteLine("Are you sure you want to buy " + store.sugarSale + " cups of sugar for $" + store.sugarSale * store.sugarPrice + "?");
-                Console.ReadLine();
+            {              
                 moneyCounter -= (store.sugarSale * store.sugarPrice);
                 sugar += store.sugarSale;
                 return sugar;
@@ -48,6 +50,7 @@ namespace LemonadeStand
         }
         public int AddLemons()
         {
+            Console.WriteLine("You have $" + moneyCounter + " to buy supplies");
             store.PurchaseLemons();
             if (store.lemonSale * store.lemonPrice > moneyCounter)
             {
@@ -56,8 +59,6 @@ namespace LemonadeStand
             }
             else
             {
-                Console.WriteLine("Are you sure you want to buy " + store.lemonSale + " cups of sugar for $" + store.lemonSale * store.lemonPrice + "?");
-                Console.ReadLine();
                 moneyCounter -= (store.lemonSale * store.lemonPrice);
                 lemons += store.lemonSale;
                 return lemons;
@@ -65,6 +66,7 @@ namespace LemonadeStand
         }
         public int AddIce()
         {
+            Console.WriteLine("You have $" + moneyCounter + " to buy supplies");
             store.PurchaseIce();
             if (store.iceSale * store.icePrice > moneyCounter)
             {
@@ -73,8 +75,6 @@ namespace LemonadeStand
             }
             else
             {
-                Console.WriteLine("Are you sure you want to buy " + store.iceSale + " cups of sugar for $" + store.iceSale * store.icePrice + "?");
-                Console.ReadLine();
                 moneyCounter -= (store.iceSale * store.icePrice);
                 iceCubes += store.iceSale;
                 return iceCubes;
@@ -82,6 +82,7 @@ namespace LemonadeStand
         }
         public int AddCups()
         {
+            Console.WriteLine("You have $" + moneyCounter + " to buy supplies");
             store.PurchaseCups();
             if (store.cupSale * store.cupPrice > moneyCounter)
             {
@@ -90,21 +91,46 @@ namespace LemonadeStand
             }
             else
             {
-                Console.WriteLine("Are you sure you want to buy " + store.cupSale + " cups of sugar for $" + store.cupSale * store.cupPrice + "?");
-                Console.ReadLine();
                 moneyCounter -= (store.cupSale * store.cupPrice);
                 cups += store.cupSale;
                 return cups;
             }
         }
-        public int MakePitchers()
+        public int PlanPitchersLemon()
         {
-            while (lemons >= 4 && sugar >= 4 && cups > 4 && iceCubes > 2)
+            Console.WriteLine("How many lemons would you like to place in each pitcher?");
+            while (int.TryParse(Console.ReadLine(), out lemonsPerPitcher))
+                {
+                return lemonsPerPitcher;
+                }
+            return PlanPitchersLemon();
+        }
+        public int PlanPitchersSugar()
+        {
+            Console.WriteLine("How many cups of sugar would you like to place in each pitcher?");
+            while (int.TryParse(Console.ReadLine(), out sugarPerPitcher))
             {
-                lemons -= 4;
-                sugar -= 4;
+                return sugarPerPitcher;
+            }
+            return PlanPitchersSugar();
+        }
+        public int PlanPitchersIce()
+        {
+            Console.WriteLine("How many ice cubes would you like to place in each pitcher?");
+            while (int.TryParse(Console.ReadLine(), out iceCubesPerPitcher))
+            {
+                return iceCubesPerPitcher;
+            }
+            return PlanPitchersIce();
+        }
+            public int MakePitchers()
+        {
+            while (lemons >= lemonsPerPitcher && sugar >= sugarPerPitcher && cups > 4 && iceCubes >= iceCubesPerPitcher)
+            {
+                lemons -= lemonsPerPitcher;
+                sugar -= sugarPerPitcher;
                 cups -= 5;
-                iceCubes -= 3;
+                iceCubes -= iceCubesPerPitcher;
                 pitcherCounter++;
             }
             return pitcherCounter;
