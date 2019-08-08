@@ -14,17 +14,19 @@ namespace LemonadeStand
         Inventory inventory = new Inventory(0, 0, 0, 0);
         private List<Day> days;
         private double cupCharge;
-        private int customersServed;
         Random random = new Random();
         private int totalDays;
+        private List<Customer> servedTemperature;
+        private List<Customer> served;
+        private int i;
 
         //construct
         public Game()
         {
             dayCounter = 1;
-
         }
         //methods
+
         public List<Day> GenerateDays()
         {
             days = new List<Day>();
@@ -36,20 +38,22 @@ namespace LemonadeStand
         }
         public void RunGame()
         {
-            Console.WriteLine("Your Lemonade Stand starts with $20.\nYou are able to purchase new supplies and ingredients each day before selling.\nCustomers will decide whether they want to buy your product based on various circumstances.\nYou will have the option to buy and sell each day for 7 days to maximize profits.");
+            Console.WriteLine("Your Lemonade Stand starts with $20.\nYou are able to purchase new supplies and ingredients each day before selling.\nCustomers will decide whether they want to buy your product based on various circumstances.\nYou will have the option to buy and sell each day for as many days as you would like, up to 30, to maximize profits.");
             player1 = new Player();
             Console.ReadLine();
             player1.ChooseName();
             Console.WriteLine("How many days will your stand be open?");
             totalDays = int.Parse(Console.ReadLine());
             GenerateDays();
-            while (dayCounter <= 7)
+            while (dayCounter <= totalDays)
             {
                 inventory.pitcherCounter = 0;
                 inventory.iceCubes = 0;
+                servedTemperature = new List<Customer>();
+                served = new List<Customer>();
                 Console.WriteLine("It is day " + dayCounter + " of " + player1.playerName + "being open. You have $" + inventory.moneyCounter + ".\n");
                 Console.ReadLine();
-                Console.WriteLine("Today, it is " + days[dayCounter-1].weather.temperature + "degrees outside and it is" + days[dayCounter-1].weather.condition + ".");
+                Console.WriteLine("Today, it is " + days[dayCounter - 1].weather.temperature + "degrees outside and it is" + days[dayCounter - 1].weather.condition + ".");
                 Console.WriteLine("You currently have the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups");
                 Console.ReadLine();
                 Console.Clear();
@@ -72,25 +76,48 @@ namespace LemonadeStand
                 Console.WriteLine("You are done buying supplies for today. How much would you like to charge per cup of lemonade in cents?");
                 cupCharge = 0.01 * int.Parse(Console.ReadLine());
                 inventory.MakePitchers();
+                customersServedTemperature(days[dayCounter - 1].customers, days[dayCounter - 1].weather.temperature);
+                //There should now be a list of only customers that meet the temperature threshold
+                for (i = 0; i < servedTemperature.Count; i++)
+                {
+                    customersServed(servedTemperature, servedTemperature[i].availableCash);
+                }
+                inventory.moneyCounter += served.Count * cupCharge;
                 Console.WriteLine("You have made " + inventory.pitcherCounter + " pitchers of lemonade to sell today.");
-                if (inventory.pitcherCounter * 5 >= days[dayCounter - 1].customer.numberOfCustomers)
-                {
-                    customersServed = days[dayCounter - 1].customer.numberOfCustomers;
-                    inventory.moneyCounter += cupCharge * days[dayCounter - 1].customer.numberOfCustomers;
-                    Console.WriteLine("You made " + ((inventory.pitcherCounter * 5) - days[dayCounter - 1].customer.numberOfCustomers) + " too many cups today and served " + customersServed + " customers");
-                }
-                else
-                {
-                    customersServed = inventory.pitcherCounter * 5;
-                    inventory.moneyCounter += inventory.pitcherCounter * 5 * cupCharge;
-                    Console.WriteLine("You ran out of inventory during the day after serving " + customersServed + " customers, leaving more customers without lemonade!");
-                }
+                //Filter list of customers to yield a list of customer that match temperature threshold and available cash
+
+                Console.WriteLine("You served " + served.Count + " today!");
                 Console.WriteLine("You ended today with $" + inventory.moneyCounter + ". and all of your ice has melted");
                 Console.ReadLine();
                 Console.Clear();
                 dayCounter++;
 
             }
+            Console.WriteLine("In " + totalDays + " you were able to make $" + (inventory.moneyCounter - 20) + "from " + player1.playerName + ".");
+        }
+        List<Customer> customersServedTemperature(List<Customer> customers, int temperature)
+        {
+            servedTemperature = new List<Customer>();
+            foreach (var customer in customers)
+            {
+                if (customer.temperatureThreshold <= temperature)
+                {
+                    servedTemperature.Add(customer);
+                }
+            }
+            return servedTemperature;
+        }
+        List<Customer> customersServed(List<Customer> servedTemperature, double availableCash)
+        {
+            served = new List<Customer>();
+            foreach (var customer in servedTemperature)
+            {
+            if (customer.availableCash <= cupCharge)
+                {
+                    served.Add(customer);
+                }
+            }
+            return served;
         }
     }
 }

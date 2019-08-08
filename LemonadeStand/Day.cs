@@ -18,6 +18,8 @@ namespace LemonadeStand
         public Day(Random random)
         {
             this.random = random;
+            customer = new Customer(random);
+            customers = new List<Customer>();
             weather = new Weather(random);
             GenerateCustomers();
             weather.GenerateConditions();
@@ -27,7 +29,7 @@ namespace LemonadeStand
         //methods
         public List<Customer> GenerateCustomers()
         {
-            numberOfCustomers = random.Next(75, 111);
+            numberOfCustomers = customer.random.Next(50, 75);
             for (int i = 1; i <= numberOfCustomers; i++)
             {
                 customers.Add(new Customer(random));

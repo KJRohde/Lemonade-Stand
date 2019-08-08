@@ -21,6 +21,7 @@ namespace LemonadeStand
         public Inventory(int sugar, int lemons, int iceCubes, int cups)
         {
             moneyCounter = 20;
+            moneyCounter = Math.Round(moneyCounter, 2);
             pitcherCounter = 0;
         }
 

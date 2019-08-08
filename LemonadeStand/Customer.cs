@@ -10,17 +10,26 @@ namespace LemonadeStand
     {
         //member variables
 
-        public Preference preference;
-        Random random;
+        public int temperatureThreshold;
+        public double availableCash;
+        public Random random;
 
 
         //construct
         public Customer(Random random)
         {
             this.random = random;
-            preference.GiveCash();
-            preference.GiveThreshold();
+            GiveCash();
+            GiveThreshold();
         }
         //methods
+        public void GiveThreshold()
+        {
+            temperatureThreshold = random.Next(55, 94);
+        }
+        public void GiveCash()
+        {
+            availableCash = random.Next(2, 10) / 10;
+        }
     }
 }
