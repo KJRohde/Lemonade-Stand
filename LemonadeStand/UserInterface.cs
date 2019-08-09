@@ -58,5 +58,25 @@ namespace LemonadeStand
             Console.WriteLine("Take your $" + store.inventory.moneyCounter + " home and rethink your life.");
             Console.ReadLine();
         }
+        public static void AskToSell(Game game)
+        {
+            Console.WriteLine("Would you like to attempt selling lemonade in this weather?");
+            switch(Console.ReadLine())
+            {
+                case "yes":
+                    Console.WriteLine("Great! Lets go to the store.");
+                    Console.ReadLine();
+                    break;
+                case "no":
+                    Console.WriteLine("You chose to skip a day of selling lemonade");
+                    game.FinishDay();
+                    break;
+                default:
+                    Console.WriteLine("please enter 'yes' or 'no'");
+                    AskToSell(game);
+                    break;
+            }
+            
+        }
 }
 }

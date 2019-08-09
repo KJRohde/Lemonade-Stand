@@ -16,6 +16,7 @@ namespace LemonadeStand
         public int lemonsPerPitcher;
         public int sugarPerPitcher;
         public int iceCubesPerPitcher;
+        public int cupsPerPitcher;
         public double moneyCounter;
         public int pitcherCounter;
 
@@ -24,6 +25,7 @@ namespace LemonadeStand
         {
             moneyCounter = 20;
             moneyCounter = Math.Round(moneyCounter, 2);
+            cupsPerPitcher = 5;
             pitcherCounter = 0;
         }
 
@@ -59,11 +61,11 @@ namespace LemonadeStand
         }
             public int MakePitchers()
         {
-            while (lemons >= lemonsPerPitcher && sugar >= sugarPerPitcher && cups > 4 && iceCubes >= iceCubesPerPitcher)
+            while (lemons >= lemonsPerPitcher && sugar >= sugarPerPitcher && iceCubes >= iceCubesPerPitcher && cups >= cupsPerPitcher)
             {
                 lemons -= lemonsPerPitcher;
                 sugar -= sugarPerPitcher;
-                cups -= 5;
+                cups -= cupsPerPitcher;
                 iceCubes -= iceCubesPerPitcher;
                 pitcherCounter++;
             }

@@ -74,6 +74,9 @@ namespace LemonadeStand
                     GenerateForecast();
                     Console.Clear();
                     UserInterface.TodayWeather(days[dayCounter - 1]);
+
+                    UserInterface.AskToSell(this);
+
                     UserInterface.DisplayInventory(store.inventory);
                     store.PurchaseSugar();
                     UserInterface.DisplayInventory(store.inventory);
@@ -131,10 +134,7 @@ namespace LemonadeStand
                         UserInterface.EndDay(store.inventory);
                     }
                 }
-                store.inventory.pitcherCounter = 0;
-                cupsLemonade = 0;
-                store.inventory.iceCubes = 0;
-                dayCounter++;
+                FinishDay();
             }
             UserInterface.EndGame(store.inventory, player1);
         }
@@ -199,6 +199,13 @@ namespace LemonadeStand
             }
             Console.WriteLine("Please choose a number of days between 1 and 30");
             return PromptDays();
+        }
+        public void FinishDay()
+        {
+            store.inventory.pitcherCounter = 0;
+            cupsLemonade = 0;
+            store.inventory.iceCubes = 0;
+            dayCounter++;
         }
     }
 }

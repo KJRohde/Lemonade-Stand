@@ -21,20 +21,41 @@ namespace LemonadeStand
             customer = new Customer(random);
             customers = new List<Customer>();
             weather = new Weather(random);
-            GenerateCustomers();
             weather.GenerateConditions();
             weather.GenerateTemperature();
+            GenerateCustomers();
         }
 
         //methods
         public List<Customer> GenerateCustomers()
         {
-            numberOfCustomers = customer.random.Next(50, 75);
-            for (int i = 1; i <= numberOfCustomers; i++)
+            if (weather.condition == "sunny" || weather.condition == "partly cloudy")
             {
-                customers.Add(new Customer(random));
+                numberOfCustomers = customer.random.Next(80, 100);
+                for (int i = 1; i <= numberOfCustomers; i++)
+                {
+                    customers.Add(new Customer(random));
+                }
+                return customers;
             }
-            return customers;
+            else if (weather.condition == "overcast")
+            {
+                numberOfCustomers = customer.random.Next(60, 85);
+                for (int i = 1; i <= numberOfCustomers; i++)
+                {
+                    customers.Add(new Customer(random));
+                }
+                return customers;
+            }
+            else
+            {
+                numberOfCustomers = customer.random.Next(40, 70);
+                for (int i = 1; i <= numberOfCustomers; i++)
+                {
+                    customers.Add(new Customer(random));
+                }
+                return customers;
+            }
         }
     }
 }
