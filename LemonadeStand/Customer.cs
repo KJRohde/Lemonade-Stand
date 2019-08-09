@@ -25,7 +25,7 @@ namespace LemonadeStand
         //methods
         public void GiveThreshold()
         {
-            temperatureThreshold = random.Next(55, 94);
+            temperatureThreshold = random.Next(60, 90);
         }
         public void GiveCash()
         {

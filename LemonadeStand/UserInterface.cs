@@ -10,7 +10,7 @@ namespace LemonadeStand
     {
         public static void DisplayInventory(Inventory inventory)
         {
-            Console.WriteLine("You now have $" + inventory.moneyCounter + " and the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups.\n");
+            Console.WriteLine("\nYou now have $" + inventory.moneyCounter + " and the following ingredients and supplies:\n" + inventory.sugar + " cups of sugar\n" + inventory.lemons + " lemons\n" + inventory.iceCubes + " ice cubes\n" + inventory.cups + " paper cups.\n");
         }
         public static void EndDay(Inventory inventory)
         {
@@ -39,5 +39,10 @@ namespace LemonadeStand
             Console.WriteLine("The game is over! Please play again and try to make even more money next time!");
             Console.ReadLine();
         }
-    }
+        public static void TodayWeather(Day day)
+        {
+            Console.WriteLine("Today is " + day.weather.temperature + " degrees and it is " + day.weather.condition + ".\n");
+        }
+
+}
 }

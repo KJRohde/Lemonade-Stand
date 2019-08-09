@@ -18,13 +18,15 @@ namespace LemonadeStand
         public double icePrice;
         public double lemonPrice;
         public double cupPrice;
+        public Inventory inventory;
 
         //construct
         public Store()
         {
-            sugarPrice = 0.12;
-            icePrice = 0.05;
-            lemonPrice = 0.29;
+            this.inventory = new Inventory(0, 0, 0, 0);
+            sugarPrice = 0.15;
+            icePrice = 0.03;
+            lemonPrice = 0.39;
             cupPrice = 0.08;
         }
 
@@ -34,7 +36,17 @@ namespace LemonadeStand
             Console.WriteLine("How many cups of sugar would you like to buy?\nSugar costs 12 cents per cup.");
             while (int.TryParse(Console.ReadLine(), out sugarSale) && sugarSale >= 0)
             {
-                return sugarSale;
+                if (sugarSale * sugarPrice > inventory.moneyCounter)
+                {
+                    Console.WriteLine("You cannot afford this many cups of sugar. Try again.");
+                    return PurchaseSugar();
+                }
+                else
+                {
+                    inventory.moneyCounter -= (sugarSale * sugarPrice);
+                    inventory.sugar += sugarSale;
+                    return inventory.sugar;
+                }
             }
             Console.WriteLine("Please enter a whole number to purchase");
             return PurchaseSugar();
@@ -44,7 +56,18 @@ namespace LemonadeStand
             Console.WriteLine("How many lemons would you like to buy?\nLemons costs 49 cents each.");
             while (int.TryParse(Console.ReadLine(), out lemonSale))
             {
-                return lemonSale;
+                if (lemonSale * lemonPrice > inventory.moneyCounter)
+                {
+                    Console.WriteLine("You cannot afford this many lemons. Try again.");
+                    lemonSale = 0;
+                    return PurchaseLemons();
+                }
+                else
+                {
+                    inventory.moneyCounter -= (lemonSale * lemonPrice);
+                    inventory.lemons += lemonSale;
+                    return inventory.lemons;
+                }
             }
             Console.WriteLine("Please enter a whole number to purchase");
             return PurchaseLemons();
@@ -54,7 +77,18 @@ namespace LemonadeStand
             Console.WriteLine("How many ice cubes would you like to buy?\nIce costs 6 cents per cube.");
             while (int.TryParse(Console.ReadLine(), out iceSale))
             {
-                return iceSale;
+                if (iceSale * icePrice > inventory.moneyCounter)
+                {
+                    Console.WriteLine("You cannot afford this many ice cubes. Try again.");
+                    iceSale = 0;
+                    return PurchaseIce();
+                }
+                else
+                {
+                    inventory.moneyCounter -= (iceSale * icePrice);
+                    inventory.iceCubes += iceSale;
+                    return inventory.iceCubes;
+                }
             }
             Console.WriteLine("Please enter a whole number to purchase");
             return PurchaseIce();
@@ -64,7 +98,18 @@ namespace LemonadeStand
             Console.WriteLine("How many cups would you like to buy?\nCups cost 8 cents each.");
             while (int.TryParse(Console.ReadLine(), out cupSale))
             {
-                return cupSale;
+                if (cupSale * cupPrice > inventory.moneyCounter)
+                {
+                    Console.WriteLine("You cannot afford this many cups. Try again.");
+                    cupSale = 0;
+                    return PurchaseCups();
+                }
+                else
+                {
+                    inventory.moneyCounter -= (cupSale * cupPrice);
+                    inventory.cups += cupSale;
+                    return inventory.cups;
+                }
             }
             Console.WriteLine("Please enter a whole number to purchase");
             return PurchaseCups();

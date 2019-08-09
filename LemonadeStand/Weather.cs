@@ -21,7 +21,7 @@ namespace LemonadeStand
         //methods
         public int GenerateTemperature()
         {
-            temperature = random.Next(55, 95);
+            temperature = random.Next(60, 92);
             return temperature;
 
         }
