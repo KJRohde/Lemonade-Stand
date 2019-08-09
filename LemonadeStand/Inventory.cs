@@ -18,7 +18,6 @@ namespace LemonadeStand
         public int iceCubesPerPitcher;
         public double moneyCounter;
         public int pitcherCounter;
-        public bool comfirmPurchase;
 
         //construct
         public Inventory(int sugar, int lemons, int iceCubes, int cups)
@@ -31,74 +30,6 @@ namespace LemonadeStand
 
 
         //methods
-        //public int AddSugar()
-        //{
-        //    Console.WriteLine("You have $" + moneyCounter + " to buy supplies");
-        //    store.PurchaseSugar();
-        //    if (store.sugarSale * store.sugarPrice > moneyCounter)
-        //    {
-        //        Console.WriteLine("You cannot afford this many cups of sugar. Try again.");
-        //        store.sugarSale = 0;
-        //        return store.PurchaseSugar();
-        //    }
-        //    else
-        //    {              
-        //        moneyCounter -= (store.sugarSale * store.sugarPrice);
-        //        sugar += store.sugarSale;
-        //        return sugar;
-        //    }
-        //}
-        //public int AddLemons()
-        //{
-        //    Console.WriteLine("You have $" + moneyCounter + " to buy supplies");
-        //    store.PurchaseLemons();
-        //    if (store.lemonSale * store.lemonPrice > moneyCounter)
-        //    {
-        //        Console.WriteLine("You cannot afford this many lemons. Try again.");
-        //        store.lemonSale = 0;
-        //        return store.PurchaseLemons();
-        //    }
-        //    else
-        //    {
-        //        moneyCounter -= (store.lemonSale * store.lemonPrice);
-        //        lemons += store.lemonSale;
-        //        return lemons;
-        //    }
-        //}
-        //public int AddIce()
-        //{
-        //    Console.WriteLine("You have $" + moneyCounter + " to buy supplies");
-        //    store.PurchaseIce();
-        //    if (store.iceSale * store.icePrice > moneyCounter)
-        //    {
-        //        Console.WriteLine("You cannot afford this many ice cubes. Try again.");
-        //        store.iceSale = 0;
-        //        return store.PurchaseIce();
-        //    }
-        //    else
-        //    {
-        //        moneyCounter -= (store.iceSale * store.icePrice);
-        //        iceCubes += store.iceSale;
-        //        return iceCubes;
-        //    }
-        //}
-        //public int AddCups()
-        //{
-        //    Console.WriteLine("You have $" + moneyCounter + " to buy supplies");
-        //    store.PurchaseCups();
-        //    if (store.cupSale * store.cupPrice > moneyCounter)
-        //    {
-        //        Console.WriteLine("You cannot afford this many cups. Try again.");
-        //        store.cupSale = 0;
-        //        return store.PurchaseCups();
-        //    }
-        //    else
-        //    {
-        //        moneyCounter -= (store.cupSale * store.cupPrice);
-        //        cups += store.cupSale;
-        //        return cups;
-        //    }
-        //}
         public int PlanPitchersLemon()
         {
             Console.WriteLine("How many lemons would you like to place in each pitcher?");

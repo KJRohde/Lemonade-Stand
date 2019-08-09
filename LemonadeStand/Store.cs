@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LemonadeStand
 {
     class Store
-        //This class is SOLID! It uses the single responsibility principle to do one thing only, and that is to sell products to the user.
+        //This class is SOLID! It uses the single responsibility principle to do one thing only, and that is to sell products to the players inventory.
     {
         //member variables
         public int sugarSale;
@@ -33,7 +33,7 @@ namespace LemonadeStand
         //methods
         public int PurchaseSugar()
         {
-            Console.WriteLine("How many cups of sugar would you like to buy?\nSugar costs 12 cents per cup.");
+            Console.WriteLine("How many cups of sugar would you like to buy?\nSugar costs " + sugarPrice + " cents per cup.");
             while (int.TryParse(Console.ReadLine(), out sugarSale) && sugarSale >= 0)
             {
                 if (sugarSale * sugarPrice > inventory.moneyCounter)
@@ -53,7 +53,7 @@ namespace LemonadeStand
         }
         public int PurchaseLemons()
         {
-            Console.WriteLine("How many lemons would you like to buy?\nLemons costs 49 cents each.");
+            Console.WriteLine("How many lemons would you like to buy?\nLemons costs " + lemonPrice + " cents each.");
             while (int.TryParse(Console.ReadLine(), out lemonSale))
             {
                 if (lemonSale * lemonPrice > inventory.moneyCounter)
@@ -74,7 +74,7 @@ namespace LemonadeStand
         }
         public int PurchaseIce()
         {
-            Console.WriteLine("How many ice cubes would you like to buy?\nIce costs 6 cents per cube.");
+            Console.WriteLine("How many ice cubes would you like to buy?\nIce costs " + icePrice + " cents per cube.");
             while (int.TryParse(Console.ReadLine(), out iceSale))
             {
                 if (iceSale * icePrice > inventory.moneyCounter)
@@ -95,7 +95,7 @@ namespace LemonadeStand
         }
         public int PurchaseCups()
         {
-            Console.WriteLine("How many cups would you like to buy?\nCups cost 8 cents each.");
+            Console.WriteLine("How many cups would you like to buy?\nCups cost " + cupPrice + " cents each.");
             while (int.TryParse(Console.ReadLine(), out cupSale))
             {
                 if (cupSale * cupPrice > inventory.moneyCounter)

@@ -34,9 +34,17 @@ namespace LemonadeStand
         }
         public static void EndGame(Inventory inventory, Player player1)
         {
-            Console.WriteLine("You were able to make $" + (inventory.moneyCounter - 20) + " from " + player1.playerName + ".");
-            Console.ReadLine();
-            Console.WriteLine("The game is over! Please play again and try to make even more money next time!");
+            if (inventory.moneyCounter >= 20)
+            {
+                Console.WriteLine("You were able to make $" + (inventory.moneyCounter - 20) + " from " + player1.playerName + ".");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("You have lost $" + (20 - inventory.moneyCounter) + ".");
+                Console.ReadLine();
+            }
+                Console.WriteLine("The game is over! Please play again and try to make even more money next time!");
             Console.ReadLine();
         }
         public static void TodayWeather(Day day)
@@ -44,5 +52,11 @@ namespace LemonadeStand
             Console.WriteLine("Today is " + day.weather.temperature + " degrees and it is " + day.weather.condition + ".\n");
         }
 
+        public static void OutOfMoney(Store store)
+        {
+            Console.WriteLine("You do not have enough money to continue the game.");
+            Console.WriteLine("Take your $" + store.inventory.moneyCounter + " home and rethink your life.");
+            Console.ReadLine();
+        }
 }
 }
