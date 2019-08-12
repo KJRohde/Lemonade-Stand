@@ -70,6 +70,10 @@ namespace LemonadeStand
                 case "no":
                     Console.WriteLine("You chose to skip a day of selling lemonade");
                     game.FinishDay();
+                    game.GenerateForecast();
+                    Console.Clear();
+                    UserInterface.TodayWeather(game.days[game.dayCounter - 1]);
+                    AskToSell(game);
                     break;
                 default:
                     Console.WriteLine("please enter 'yes' or 'no'");
